@@ -106,10 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             const responseData = {
                 name: formData.get('name'),
-                mairie: formData.get('mairie'),
-                mairieCount: formData.get('mairie-count'),
-                henne: formData.get('henne'),
-                henneCount: formData.get('henne-count'),
                 houppa: formData.get('houppa'),
                 houppaCount: formData.get('houppa-count')
             };
@@ -119,8 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Préparation du message SMS
             let smsMessage = `Nouvelle confirmation de présence:\n`;
             smsMessage += `De: ${responseData.name}\n`;
-            smsMessage += `Mairie: ${responseData.mairie}${responseData.mairie === 'oui' ? ` (${responseData.mairieCount} pers.)` : ''}\n`;
-            smsMessage += `Henné: ${responseData.henne}${responseData.henne === 'oui' ? ` (${responseData.henneCount} pers.)` : ''}\n`;
             smsMessage += `Houppa: ${responseData.houppa}${responseData.houppa === 'oui' ? ` (${responseData.houppaCount} pers.)` : ''}`;
             
             // Proposer l'envoi à Ilana ou Harrisson

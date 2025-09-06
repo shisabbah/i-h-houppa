@@ -153,19 +153,6 @@ body {
     justify-content: center;
 }
 
-/* Voile pour lisibilité du décompte */
-.countdown-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(2, 127, 193, 0.3) 0%,
-        rgba(2, 127, 193, 0.5) 50%,
-        rgba(2, 127, 193, 0.7) 100%
-    );
-    pointer-events: none;
-}
 
 .countdown-content {
     max-width: 800px;
@@ -476,21 +463,6 @@ body {
     padding: 2rem;
 }
 
-.mairie-image {
-    margin-bottom: 2rem;
-}
-
-.mairie-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.mairie-img:hover {
-    transform: scale(1.02);
-}
 
 .highlight-text {
     font-size: 1.5rem;
@@ -833,9 +805,6 @@ body {
         font-size: 1.1rem;
     }
     
-    .mairie-img {
-        max-width: 90%;
-    }
     
     .nav-container {
         flex-direction: column;
@@ -914,9 +883,6 @@ body {
         font-size: 1rem;
     }
     
-    .mairie-img {
-        max-width: 85%;
-    }
     
     .container {
         padding: 0 15px;
@@ -984,22 +950,6 @@ html {
 /* Envelope CTA */
 /* supprimé: .envelope-btn, .envelope, .envelope-flap, .envelope-body, .envelope-letter, .letter-line et animations associées */ 
 
-/* Henné */
-.henne-image {
-    margin-bottom: 2rem;
-}
-
-.henne-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.henne-img:hover {
-    transform: scale(1.02);
-}
 
 /* Houppa */
 .houppa-image {
