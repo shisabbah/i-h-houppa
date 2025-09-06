@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariage Ilana & Harisson</title>
+    
+    <!-- Meta tags pour le partage sur les réseaux sociaux -->
+    <meta property="og:title" content="Mariage Ilana & Harisson">
+    <meta property="og:description" content="Invitation au mariage d'Ilana et Harisson">
+    <meta property="og:image" content="https://shisabbah.github.io/i-h/logo.jpeg">
+    <meta property="og:url" content="https://shisabbah.github.io/i-h/">
+    <meta property="og:type" content="website">
+    
+    <!-- Meta tags pour Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mariage Ilana & Harisson">
+    <meta name="twitter:description" content="Invitation au mariage d'Ilana et Harisson">
+    <meta name="twitter:image" content="https://shisabbah.github.io/i-h/logo.jpeg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal d'accueil -->
+    <div id="welcomeModal" class="welcome-modal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="welcome-image">
+                <img src="accueil.png" alt="Image d'accueil" class="welcome-img">
+                <button class="voir-invitation-btn" id="voirInvitation">
+                    Voir l'invitation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Décompte -->
+    <section class="countdown-section">
+        <div class="container">
+            <div class="countdown-content">
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span id="days" class="countdown-number">00</span>
+                        <span class="countdown-label">Jours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours" class="countdown-number">00</span>
+                        <span class="countdown-label">Heures</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes" class="countdown-number">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds" class="countdown-number">00</span>
+                        <span class="countdown-label">Secondes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Mairie -->
+    <section id="mairie" class="section">
+        <div class="container">
+            <div class="content-box">
+                <h2 class="section-title">La Mairie</h2>
+                <div class="mairie-image">
+                    <img src="mairie.png" alt="Mairie" class="mairie-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Henné -->
+    <section id="henne" class="section">
+        <div class="container">
+            <div class="content-box">
+                <h2 class="section-title">Le Henné</h2>
+                <div class="henne-image">
+                    <img src="henne.png" alt="Henné" class="henne-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Houppa -->
+    <section id="houppa" class="section">
+        <div class="container">
+            <div class="content-box">
+                <h2 class="section-title">La Houppa</h2>
+                <div class="houppa-image">
+                    <img src="houppa.png" alt="Houppa" class="houppa-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Formulaire de Présence -->
+    <section id="presence" class="section">
+        <div class="container">
+            <div class="content-box">
+                <h2 class="section-title">Confirmez votre présence</h2>
+                <form class="presence-form">
+                    <div class="form-group">
+                        <label for="name">Nom et Prénom</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Présence à la Mairie</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="mairie" value="oui"> Oui</label>
+                            <label><input type="radio" name="mairie" value="non"> Non</label>
+                        </div>
+                        <div class="number-group" id="mairie-number" style="display: none;">
+                            <label for="mairie-count">Nombre de personnes</label>
+                            <input type="number" id="mairie-count" name="mairie-count" min="1" max="10">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Présence au Henné</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="henne" value="oui"> Oui</label>
+                            <label><input type="radio" name="henne" value="non"> Non</label>
+                        </div>
+                        <div class="number-group" id="henne-number" style="display: none;">
+                            <label for="henne-count">Nombre de personnes</label>
+                            <input type="number" id="henne-count" name="henne-count" min="1" max="10">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Présence à la Houppa</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="houppa" value="oui"> Oui</label>
+                            <label><input type="radio" name="houppa" value="non"> Non</label>
+                        </div>
+                        <div class="number-group" id="houppa-number" style="display: none;">
+                            <label for="houppa-count">Nombre de personnes</label>
+                            <input type="number" id="houppa-count" name="houppa-count" min="1" max="10">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Confirmer ma présence</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 

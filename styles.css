@@ -1,0 +1,1019 @@
+/* Modal d'accueil */
+.welcome-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease;
+}
+
+.welcome-modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-content {
+    background: transparent;
+    border-radius: 20px;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: none;
+    animation: modalSlideIn 0.6s ease-out;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.close-btn:hover {
+    color: var(--color-primary);
+    background: white;
+    transform: scale(1.1);
+}
+
+.welcome-image {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.welcome-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.voir-invitation-btn {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(2, 127, 193, 0.2);
+    z-index: 10;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.voir-invitation-btn:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 12px 35px rgba(2, 127, 193, 0.4);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Reset et styles de base */
+:root {
+    /* Palette thème inspirée de mairie.png */
+    --color-primary: #027fc1;           /* Bleu principal */
+    --color-primary-dark: #0268a3;      /* Bleu foncé */
+    --color-primary-light: #89c9ea;     /* Bleu clair */
+    --color-bg: #f4f9fd;                /* Fond très clair bleuté */
+    --color-text: #1f2d3a;              /* Texte principal */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: linear-gradient(135deg, var(--color-bg) 0%, #e6f3fb 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Section Décompte */
+.countdown-section {
+    padding: 80px 0;
+    background: url('ih.jpeg') center/cover no-repeat;
+    text-align: center;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Voile pour lisibilité du décompte */
+.countdown-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(2, 127, 193, 0.3) 0%,
+        rgba(2, 127, 193, 0.5) 50%,
+        rgba(2, 127, 193, 0.7) 100%
+    );
+    pointer-events: none;
+}
+
+.countdown-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #027fc1, #0268a3);
+    border: 4px solid #89c9ea;
+    box-shadow: 0 15px 40px rgba(2, 127, 193, 0.3);
+    backdrop-filter: blur(2px);
+    transition: transform 0.3s ease;
+}
+
+.countdown-item:hover {
+    transform: scale(1.05);
+}
+
+.countdown-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-label {
+    font-size: 1.1rem;
+    color: #e6f3fb;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+/* Responsive pour le décompte */
+@media (max-width: 768px) {
+    .countdown-section {
+        padding: 40px 0 !important;
+        min-height: 80vh !important;
+        background-attachment: scroll !important;
+    }
+    
+    .countdown-item { 
+        width: 100px !important; 
+        height: 100px !important; 
+    }
+    .countdown-number { 
+        font-size: 1.6rem !important; 
+    }
+    .countdown-label { 
+        font-size: 0.8rem !important; 
+        margin-top: 0.3rem !important;
+    }
+    .countdown {
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .countdown-item { 
+        width: 80px !important; 
+        height: 80px !important; 
+    }
+    .countdown-number { 
+        font-size: 1.3rem !important; 
+    }
+    .countdown-label { 
+        font-size: 0.7rem !important; 
+        margin-top: 0.2rem !important;
+    }
+    .countdown {
+        gap: 0.8rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-section {
+        padding: 20px 0 !important;
+        min-height: 70vh !important;
+    }
+    
+    .countdown-item { 
+        width: 60px !important; 
+        height: 60px !important; 
+    }
+    .countdown-number { 
+        font-size: 1rem !important; 
+    }
+    .countdown-label { 
+        font-size: 0.6rem !important; 
+        margin-top: 0.2rem !important;
+    }
+    .countdown {
+        gap: 0.5rem !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .countdown-section {
+        padding: 15px 0 !important;
+        min-height: 60vh !important;
+    }
+    
+    .countdown-item { 
+        width: 50px !important; 
+        height: 50px !important; 
+    }
+    .countdown-number { 
+        font-size: 0.9rem !important; 
+    }
+    .countdown-label { 
+        font-size: 0.5rem !important; 
+        margin-top: 0.1rem !important;
+    }
+    .countdown {
+        gap: 0.3rem !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .countdown-item { 
+        width: 45px !important; 
+        height: 45px !important; 
+    }
+    .countdown-number { 
+        font-size: 0.8rem !important; 
+    }
+    .countdown-label { 
+        font-size: 0.4rem !important; 
+        margin-top: 0.1rem !important;
+    }
+    .countdown {
+        gap: 0.2rem !important;
+    }
+}
+
+/* Sections générales */
+
+/* Hero avec image de fond */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('ih.jpeg') center/cover no-repeat fixed;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Voile bleu pour lisibilité du texte */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 32, 51, 0.25) 0%,
+        rgba(0, 32, 51, 0.35) 40%,
+        rgba(0, 32, 51, 0.5) 100%
+    );
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-logo {
+    margin-bottom: 2rem;
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero-logo-img {
+    height: 120px;
+    width: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.hero-logo-img:hover {
+    transform: scale(1.05);
+}
+
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Compteur style 'ronds' */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid var(--color-primary-light);
+    box-shadow: 0 10px 30px rgba(2, 127, 193, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+.countdown-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 1.05rem;
+    color: var(--color-text);
+    opacity: 0.9;
+}
+
+/* Variantes responsives pour les ronds */
+@media (max-width: 768px) {
+    .countdown-item { width: 120px; height: 120px; }
+    .countdown-number { font-size: 2rem; }
+    .countdown-label { font-size: 0.95rem; }
+}
+
+@media (max-width: 480px) {
+    .countdown-item { width: 100px; height: 100px; }
+    .countdown-number { font-size: 1.6rem; }
+    .countdown-label { font-size: 0.85rem; }
+}
+
+/* Sections générales */
+.section {
+    padding: 100px 0;
+    background: white;
+    margin: 50px 0;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.section:nth-child(even) {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #333;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+}
+
+/* Hebrew Header */
+.hebrew-header {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+/* Content Box */
+.content-box {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.mairie-image {
+    margin-bottom: 2rem;
+}
+
+.mairie-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.mairie-img:hover {
+    transform: scale(1.02);
+}
+
+.highlight-text {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.ceremony-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+    font-size: 1.3rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+/* Event Details */
+.event-details {
+    margin: 2rem 0;
+}
+
+.date, .time, .location, .address {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.date {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.hebrew-date {
+    font-size: 1rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.location {
+    font-weight: 500;
+}
+
+.address {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Buttons */
+.btn-itineraire {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(2, 127, 193, 0.3);
+    margin: 1rem 0;
+}
+
+.btn-itineraire:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(2, 127, 193, 0.4);
+}
+
+/* Invitation Text */
+.invitation-text {
+    text-align: center;
+    margin: 2rem 0;
+    line-height: 2;
+}
+
+.invitation-text p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.invitation-main {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 2rem 0;
+}
+
+.invitation-sub {
+    font-size: 1.2rem;
+    color: #555;
+    font-style: italic;
+}
+
+/* Memorial Note */
+.memorial-note {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3fb 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    border-left: 4px solid var(--color-primary);
+}
+
+.memorial-note p {
+    font-style: italic;
+    color: #666;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* Accommodation Info */
+.accommodation-info {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    border: 1px solid #e9ecef;
+}
+
+.accommodation-info p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.reservation-note {
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-top: 1rem;
+}
+
+/* Contact Info */
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 2rem 0;
+}
+
+.contact-person {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #d4af37, #f4d03f);
+    color: white;
+    border-radius: 15px;
+    min-width: 150px;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.contact-person h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* Form Styles */
+.presence-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #027fc1;
+    box-shadow: 0 0 0 3px rgba(2, 127, 193, 0.1);
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.radio-group input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #027fc1;
+}
+
+.number-group {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #027fc1;
+}
+
+.number-group label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.number-group input[type="number"] {
+    max-width: 150px;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #027fc1, #0268a3);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(2, 127, 193, 0.3);
+    width: 100%;
+    margin-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(2, 127, 193, 0.4);
+}
+
+/* Responsive pour le formulaire */
+@media (max-width: 768px) {
+    .presence-form {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .number-group input[type="number"] {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .presence-form {
+        padding: 1rem;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="number"],
+    .form-group textarea {
+        padding: 12px;
+    }
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 50px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #d4af37;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 500px;
+    }
+    
+    .close-btn {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.6rem;
+    }
+    
+    .voir-invitation-btn {
+        bottom: 60px;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+    
+    .mairie-img {
+        max-width: 90%;
+    }
+    
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-logo {
+        order: -1;
+    }
+    
+    .logo-img {
+        height: 40px;
+    }
+    
+    .hero-logo-img {
+        height: 80px;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .countdown {
+        gap: 1rem;
+    }
+    
+    .countdown-item {
+        min-width: 80px;
+        padding: 1rem;
+    }
+    
+    .countdown-number {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .ceremony-title {
+        font-size: 2.5rem;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        max-width: 400px;
+    }
+    
+    .close-btn {
+        top: 8px;
+        right: 8px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.4rem;
+    }
+    
+    .voir-invitation-btn {
+        bottom: 45px;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .mairie-img {
+        max-width: 85%;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .logo-img {
+        height: 35px;
+    }
+    
+    .hero-logo-img {
+        height: 60px;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .countdown-item {
+        min-width: 60px;
+        padding: 0.8rem;
+    }
+    
+    .countdown-number {
+        font-size: 1.5rem;
+    }
+    
+    .section {
+        padding: 60px 0;
+        margin: 30px 0;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+} 
+
+/* Envelope CTA */
+/* supprimé: .envelope-btn, .envelope, .envelope-flap, .envelope-body, .envelope-letter, .letter-line et animations associées */ 
+
+/* Henné */
+.henne-image {
+    margin-bottom: 2rem;
+}
+
+.henne-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.henne-img:hover {
+    transform: scale(1.02);
+}
+
+/* Houppa */
+.houppa-image {
+    margin-bottom: 2rem;
+}
+
+.houppa-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.houppa-img:hover {
+    transform: scale(1.02);
+} 
