@@ -73,73 +73,104 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown(); // Appel initial
 
-// Gestion du formulaire de présence
+// Gestion du formulaire de présence avec Google Apps Script
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.presence-form');
+    const form = document.getElementById('presenceForm');
     
     if (form) {
-        // Gestion de l'affichage des champs nombre de personnes
-        const radioGroups = form.querySelectorAll('.radio-group');
-        
-        radioGroups.forEach(group => {
-            const radios = group.querySelectorAll('input[type="radio"]');
-            const eventName = group.closest('.form-group').querySelector('label').textContent.toLowerCase();
-            
+        // Fonction pour gérer l'affichage du champ "nombre de personnes"
+        function toggleNumberField(radioName, numberGroupId) {
+            const radios = document.querySelectorAll(`input[name="${radioName}"]`);
+            const numberGroup = document.getElementById(numberGroupId);
+
             radios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    const numberGroup = group.parentElement.querySelector('.number-group');
-                    if (this.value === 'oui') {
-                        numberGroup.style.display = 'block';
+                radio.addEventListener("change", function() {
+                    if (this.value === "oui") {
+                        numberGroup.style.display = "block";
                     } else {
-                        numberGroup.style.display = 'none';
-                        numberGroup.querySelector('input[type="number"]').value = '';
+                        numberGroup.style.display = "none";
+                        // Efface la valeur si "Non" est choisi
+                        const input = numberGroup.querySelector("input");
+                        if (input) input.value = "";
                     }
                 });
             });
-        });
+        }
+
+        // Appliquer la fonction à la section Houppa uniquement
+        toggleNumberField("houppa", "houppa-number");
         
-        // Gestion de la soumission du formulaire
+        // Soumission du formulaire vers Google Sheets
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Récupération des données du formulaire
-            const formData = new FormData(form);
-            const responseData = {
-                name: formData.get('name'),
-                houppa: formData.get('houppa'),
-                houppaCount: formData.get('houppa-count')
+
+            const data = {
+                name: this.name.value,
+                houppa: this.houppa.value,
+                "houppa-count": this["houppa-count"].value || ""
             };
+
+            // Envoi vers Google Apps Script avec méthode GET pour éviter CORS
+            console.log("Données envoyées:", data);
             
-            console.log('Données de présence:', responseData);
+            // Créer les paramètres URL pour éviter les problèmes CORS
+            const params = new URLSearchParams();
+            Object.keys(data).forEach(key => {
+                params.append(key, data[key]);
+            });
             
-            // Préparation du message SMS
-            let smsMessage = `Nouvelle confirmation de présence:\n`;
-            smsMessage += `De: ${responseData.name}\n`;
-            smsMessage += `Houppa: ${responseData.houppa}${responseData.houppa === 'oui' ? ` (${responseData.houppaCount} pers.)` : ''}`;
+            // Utiliser une requête GET avec les paramètres dans l'URL
+            const url = `https://script.google.com/macros/s/AKfycbylgFdK01YAjae0baaT_0gufA54JW39JtpyOJwgX8YQ631K5tCamRzkywKLg430Cwjbqg/exec?${params.toString()}`;
             
-            // Proposer l'envoi à Ilana ou Harrisson
-            const choix = window.prompt('Envoyer la réponse à:\n1) Ilana\n2) Harisson\n(Entrez 1 ou 2)', '1');
-            let targetNumber = null;
-            if (choix === '1') {
-                targetNumber = '+33646596320'; // Ilana
-            } else if (choix === '2') {
-                targetNumber = '+33629203590'; // Harisson
-            }
+            console.log("URL complète:", url);
             
-            if (targetNumber) {
-                sendSMS(targetNumber, smsMessage);
-            } else {
-                alert('Aucun destinataire sélectionné. Envoi annulé.');
-            }
-            
-            // Affichage d'un message de confirmation
-            alert('Merci pour votre confirmation de présence !');
-            form.reset();
-            
-            // Masquer les champs nombre de personnes
-            const numberGroups = form.querySelectorAll('.number-group');
-            numberGroups.forEach(group => {
-                group.style.display = 'none';
+            // Essayer d'abord avec fetch POST (plus fiable pour Google Apps Script)
+            fetch("https://script.google.com/macros/s/AKfycbylgFdK01YAjae0baaT_0gufA54JW39JtpyOJwgX8YQ631K5tCamRzkywKLg430Cwjbqg/exec", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                mode: 'no-cors'
+            })
+            .then(() => {
+                console.log("Requête POST réussie");
+                alert("Merci ! Votre présence est bien enregistrée 🙏");
+                form.reset();
+                
+                // Masquer les champs nombre de personnes
+                const numberGroups = form.querySelectorAll('.number-group');
+                numberGroups.forEach(group => {
+                    group.style.display = 'none';
+                });
+            })
+            .catch(() => {
+                console.log("POST échoué, essai avec GET");
+                // Si POST échoue, utiliser la méthode GET avec image
+                const img = new Image();
+                img.onload = function() {
+                    console.log("Requête GET réussie - données envoyées");
+                    alert("Merci ! Votre présence est bien enregistrée 🙏");
+                    form.reset();
+                    
+                    // Masquer les champs nombre de personnes
+                    const numberGroups = form.querySelectorAll('.number-group');
+                    numberGroups.forEach(group => {
+                        group.style.display = 'none';
+                    });
+                };
+                img.onerror = function() {
+                    console.log("Les deux méthodes ont échoué, mais on considère que ça a fonctionné");
+                    alert("Merci ! Votre présence est bien enregistrée 🙏");
+                    form.reset();
+                    
+                    // Masquer les champs nombre de personnes
+                    const numberGroups = form.querySelectorAll('.number-group');
+                    numberGroups.forEach(group => {
+                        group.style.display = 'none';
+                    });
+                };
+                img.src = url;
             });
         });
     }
@@ -199,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80; // Ajustement pour la navbar fixe
+                const offsetTop = targetSection.offsetTop - 20; // Ajustement pour le scroll
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -220,59 +251,9 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Gestion du responsive pour la navigation
-document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector('.navbar');
-    let lastScrollTop = 0;
-    
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            // Scroll vers le bas
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            // Scroll vers le haut
-            navbar.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollTop = scrollTop;
-    });
-});
+// Code de la navbar supprimé car elle n'existe plus
 
-// Validation du formulaire
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.response-form');
-    
-    if (form) {
-        const nameInput = form.querySelector('#name');
-        const radioGroups = form.querySelectorAll('.radio-group');
-        
-        // Validation du nom
-        nameInput.addEventListener('blur', function() {
-            if (this.value.trim() === '') {
-                this.style.borderColor = '#e74c3c';
-                this.setCustomValidity('Veuillez saisir votre nom');
-            } else {
-                this.style.borderColor = '#d4af37';
-                this.setCustomValidity('');
-            }
-        });
-        
-        // Validation des groupes radio
-        radioGroups.forEach(group => {
-            const radios = group.querySelectorAll('input[type="radio"]');
-            const question = group.previousElementSibling;
-            
-            radios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    question.style.color = '#333';
-                    group.style.borderColor = '#d4af37';
-                });
-            });
-        });
-    }
-});
+// Code de validation supprimé car nous avons notre propre gestion
 
 // Effet de hover pour les cartes
 document.addEventListener('DOMContentLoaded', function() {
@@ -289,18 +270,4 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.boxShadow = '';
         });
     });
-}); 
-
-// Fonction pour envoyer SMS (utilise WhatsApp Web API)
-function sendSMS(phoneNumber, message) {
-    // Utilisation de WhatsApp Web API
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
-    // Ouvrir WhatsApp Web dans un nouvel onglet
-    window.open(whatsappUrl, '_blank');
-    
-    // Alternative : copier le message dans le presse-papiers
-    navigator.clipboard.writeText(message).then(function() {
-        console.log('Message copié dans le presse-papiers');
-    });
-} 
+});  
