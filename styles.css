@@ -464,6 +464,22 @@ body {
 }
 
 
+.mairie-image {
+    margin-bottom: 2rem;
+}
+
+.mairie-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.mairie-img:hover {
+    transform: scale(1.02);
+}
+
 .highlight-text {
     font-size: 1.5rem;
     color: #666;
@@ -799,10 +815,8 @@ body {
         font-size: 1.6rem;
     }
     
-    .voir-invitation-btn {
-        bottom: 60px;
-        padding: 12px 25px;
-        font-size: 1.1rem;
+    .mairie-img {
+        max-width: 90%;
     }
     
     
@@ -877,10 +891,8 @@ body {
         font-size: 1.4rem;
     }
     
-    .voir-invitation-btn {
-        bottom: 45px;
-        padding: 10px 20px;
-        font-size: 1rem;
+    .mairie-img {
+        max-width: 85%;
     }
     
     

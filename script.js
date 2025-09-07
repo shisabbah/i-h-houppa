@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Appliquer la fonction à la section Houppa uniquement
+        // Appliquer la fonction aux sections Mairie et Houppa
+        toggleNumberField("mairie", "mairie-number");
         toggleNumberField("houppa", "houppa-number");
         
         // Soumission du formulaire vers Google Sheets
@@ -106,6 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const data = {
                 name: this.name.value,
+                mairie: this.mairie.value,
+                "mairie-count": this["mairie-count"].value || "",
                 houppa: this.houppa.value,
                 "houppa-count": this["houppa-count"].value || ""
             };
