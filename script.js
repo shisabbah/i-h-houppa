@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Appliquer la fonction aux sections Mairie et Houppa
+        // Appliquer la fonction aux 3 sections
         toggleNumberField("mairie", "mairie-number");
         toggleNumberField("houppa", "houppa-number");
         
